@@ -1,0 +1,2 @@
+# reaction-diffusion-system
+This simulation was written in Haxe using the Kha framework before being exported to HTML5. If you would like to know more about the simulation please go to Karl Sim's &lt;a href="https://www.karlsims.com/rd.html">excellent tutorial and writeup&lt;/a> or visit the  Wikipedia page on &lt;a href="https://en.wikipedia.org/wiki/Reaction-diffusion_system">reaction-diffusion systems&lt;/a>.
