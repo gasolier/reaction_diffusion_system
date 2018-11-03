@@ -109,8 +109,6 @@ kha__$Color_Color_$Impl_$.set_A = function(this1,f) {
 var GrayScottModel = $hx_exports["GrayScottModel"] = function() {
 	this.convolutionMatrix = [[0.05,0.2,0.05],[0.2,-1,0.2],[0.05,0.2,0.05]];
 	this.paint = false;
-	this.bColour = kha__$Color_Color_$Impl_$.fromBytes(128,0,128);
-	this.aColour = kha__$Color_Color_$Impl_$.fromBytes(255,84,84);
 	this.initialised = false;
 	this.cellSize = 5;
 	this.backbuffer = kha_Image.createRenderTarget(750,750);
@@ -152,6 +150,9 @@ var GrayScottModel = $hx_exports["GrayScottModel"] = function() {
 };
 $hxClasses["GrayScottModel"] = GrayScottModel;
 GrayScottModel.__name__ = true;
+GrayScottModel.returnColour = function(colourString) {
+	return kha__$Color_Color_$Impl_$.fromString(colourString);
+};
 GrayScottModel.prototype = {
 	onMouseDown: function(button,x,y) {
 		this.paint = true;
@@ -178,7 +179,7 @@ GrayScottModel.prototype = {
 				var x = _g3++;
 				var aPercent = GrayScottModel.cellArr_A[y][x];
 				var bPercent = GrayScottModel.cellArr_B[y][x];
-				g.set_color(kha__$Color_Color_$Impl_$.fromBytes(this.mixRGBVal(this.lerp(0,(this.aColour & 16711680) >>> 16,aPercent),this.lerp(0,(this.bColour & 16711680) >>> 16,bPercent)),this.mixRGBVal(this.lerp(0,(this.aColour & 65280) >>> 8,aPercent),this.lerp(0,(this.bColour & 65280) >>> 8,bPercent)),this.mixRGBVal(this.lerp(0,this.aColour & 255,aPercent),this.lerp(0,this.bColour & 255,bPercent))));
+				g.set_color(kha__$Color_Color_$Impl_$.fromBytes(this.mixRGBVal(this.lerp(0,(GrayScottModel.aColour & 16711680) >>> 16,aPercent),this.lerp(0,(GrayScottModel.bColour & 16711680) >>> 16,bPercent)),this.mixRGBVal(this.lerp(0,(GrayScottModel.aColour & 65280) >>> 8,aPercent),this.lerp(0,(GrayScottModel.bColour & 65280) >>> 8,bPercent)),this.mixRGBVal(this.lerp(0,GrayScottModel.aColour & 255,aPercent),this.lerp(0,GrayScottModel.bColour & 255,bPercent))));
 				g.fillRect(x * this.cellSize,y * this.cellSize,this.cellSize,this.cellSize);
 			}
 		}
@@ -19125,6 +19126,8 @@ GrayScottModel.diffusion_rate_b = 0.5;
 GrayScottModel.feed_rate = 0.0545;
 GrayScottModel.kill_rate = 0.062;
 GrayScottModel.state = "paused";
+GrayScottModel.aColour = kha__$Color_Color_$Impl_$.fromBytes(255,84,84);
+GrayScottModel.bColour = kha__$Color_Color_$Impl_$.fromBytes(128,0,128);
 haxe_Unserializer.DEFAULT_RESOLVER = new haxe__$Unserializer_DefaultResolver();
 haxe_Unserializer.BASE64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%:";
 haxe_crypto_Base64.CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";

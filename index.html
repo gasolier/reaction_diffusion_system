@@ -37,13 +37,28 @@
                     <input id='dARSet' type="number" step='any'>
                 </td>
             </tr>
-            
             <tr>
                 <td>
                     Diffusion Rate B: 
                 </td> 
                 <td>
                     <input id='dBRSet' type="number" step='any'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Chemical A Colour:
+                </td> 
+                <td>
+                    <input id='cASet' type="color" step='any'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Chemical B Colour:
+                </td> 
+                <td>
+                    <input id='cBSet' type="color" step='any'>
                 </td>
             </tr>
             <tr>
@@ -74,6 +89,9 @@
             document.getElementById('kRSet').value = '0.062';
             document.getElementById('dARSet').value = '1.0';
             document.getElementById('dBRSet').value = '0.5';
+            document.getElementById('cASet').value = "#ff5454";
+            document.getElementById('cBSet').value = "#800080";
+            
             document.getElementById('fRSet').onchange = function() {
                 GrayScottModel.feed_rate = parseFloat(document.getElementById('fRSet').value);
             }
@@ -101,6 +119,12 @@
                         GrayScottModel.cellArr_B[y][x] = 0.0;
                     }
                 }
+            }
+            document.getElementById("cASet").onchange = function() {
+                GrayScottModel.aColour = GrayScottModel.returnColour(document.getElementById("cASet").value);
+            }
+            document.getElementById("cBSet").onchange = function() {
+                GrayScottModel.bColour = GrayScottModel.returnColour(document.getElementById("cBSet").value);
             }
         </script>
     </body>
