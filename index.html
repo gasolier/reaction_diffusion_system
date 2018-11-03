@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta charset="utf-8"/>
+
+        <link rel="stylesheet" type="text/css" href="main.css">
+
+    	<title>Gray-Scott Model</title>
+    </head>
+    
+    <body>
+    	<canvas id="khanvas" width="750" height="750"></canvas>
+    	<div id='control-panel'>
+            <table>
+            <tr>
+                <td>
+    		      Feed rate: 
+                </td>
+                <td>
+                    <input id='fRSet' type="number" step='any'>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    Kill rate:
+                </td> 
+                <td>
+                    <input id='kRSet' type="number" step='any'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                  Diffusion Rate A: 
+                </td>
+                <td>
+                    <input id='dARSet' type="number" step='any'>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    Diffusion Rate B: 
+                </td> 
+                <td>
+                    <input id='dBRSet' type="number" step='any'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Press To Simulate/Pause: 
+                </td> 
+                <td>
+                    <button id='changeState'>Simulate/Pause</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Press To Clear: 
+                </td> 
+                <td>
+                    <button id='clearBoard'>Clear</button>
+                </td>
+            </tr>
+            </table>
+            <br>
+            <div style="width: 96%; margin-left: 2%; margin-top: 10%">
+            This simulation was written in Haxe using the Kha framework before being exported to HTML5. If you would like to know more about the simulation please go to Karl Sim's <a href="https://www.karlsims.com/rd.html">excellent tutorial and writeup</a> or visit the  Wikipedia page on <a href="https://en.wikipedia.org/wiki/Reaction-diffusion_system">reaction-diffusion systems</a>.
+            </div>
+    	</div>
+    	<script src="kha.js"></script>
+        <script type="text/javascript">
+            document.getElementById('fRSet').value = '0.0545';
+            document.getElementById('kRSet').value = '0.062';
+            document.getElementById('dARSet').value = '1.0';
+            document.getElementById('dBRSet').value = '0.5';
+            document.getElementById('fRSet').onchange = function() {
+                GrayScottModel.feed_rate = parseFloat(document.getElementById('fRSet').value);
+            }
+            document.getElementById('kRSet').onchange = function() {
+                GrayScottModel.kill_rate = parseFloat(document.getElementById('kRSet').value);
+            }
+            document.getElementById('dARSet').onchange = function() {
+                GrayScottModel.diffusion_rate_a = parseFloat(document.getElementById('dARSet').value);
+            }
+            document.getElementById('dBRSet').onchange = function() {
+                GrayScottModel.diffusion_rate_b = parseFloat(document.getElementById('dBRSet').value);
+            }
+            document.getElementById('changeState').onclick = function() {
+                if (GrayScottModel.state == "paused") {
+                    GrayScottModel.state = "simulating";
+                } else {
+                    GrayScottModel.state = "paused";
+                }
+            }
+            document.getElementById('clearBoard').onclick = function() {
+                GrayScottModel.state = 'paused';
+                for (let y = 0; y < GrayScottModel.cellArr_A.length; y++) {
+                    for (let x = 0; x < GrayScottModel.cellArr_A[y].length; x++) {
+                        GrayScottModel.cellArr_A[y][x] = 1.0;
+                        GrayScottModel.cellArr_B[y][x] = 0.0;
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>

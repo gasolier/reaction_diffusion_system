@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+body {
+    font-family: "Ubuntu";
+}
+
+#control-panel {
+    position: fixed;
+
+    width: 39%;
+    height: 98%;
+
+    top: 1.1%;
+    left: 60%;
+
+    border: 1px solid black;
+}
